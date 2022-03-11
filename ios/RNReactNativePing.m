@@ -47,16 +47,16 @@ RCT_EXPORT_METHOD(
             if (!ping) {
                 return;
             }
-            resolve(@(@(summary.rtt * 1000).intValue));
             [ping stop];
             ping = nil;
+            resolve(@(@(summary.rtt * 1000).intValue));
         } fail:^(NSError *_Nonnull error) {
             if (!ping) {
                 return;
             }
-            reject(@(error.code).stringValue,error.domain,error);
             [ping stop];
             ping = nil;
+            reject(@(error.code).stringValue,error.domain,error);
         }];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(timeout * NSEC_PER_MSEC)), _queue, ^{
             if (!ping) {
